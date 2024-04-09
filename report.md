@@ -30,24 +30,29 @@
 서비스 연속성을 위한 무중단, 즉 고가용성을 달성 하기 위해서는 여러가지 항목을 고려 해야 합니다. 
 eks 기반이라는 가정 하에 큰 단위의 resource 부터 나열 하자면
 ## resource
- - provider(AWS)
+ - provider(AWS) 
+    - CSP도 서비스 가용성이 100%는 아닙니다. 
+    - 그래서 자체 IDC를 구축하여 하이브리드 클라우드를 구축 하거나 멀티 클라우드를 구축 하는 방법도 있습니다.
+    - 멀티 or 하이브리드 클라우드를 구축 하였다면 dns 서버에서 가중치를 조절 하여 트래픽을 분산 할 수 있습니다.
  - nework(vpc-elb)
+    - 서비스 가용성, 무중단 배포를 위해서는 ecs, eks위에 elb를 연결 해야 합니다.
+    - EKS와 ELB는 서로 긴밀한 관계를 맺고 있습니다. 
+    - EKS로 생성 된 POD는(service : LoadBalnace) ELB의 Private IP를 가지고 있습니다.
  - node(ec2)
  - pod
- - database
- - 기타 서비스 component (redis, kafaka 등)
+    먼저 eks에서 서비스를 제공 하기 위해서는 pod에 서비스를 올려야 합니다.
+    pod를 구동하는 방법은 크게 3가지가 있습니다.
+    1. pod : kubectl run 으로 시작 하며 파드가 삭제 될 경우 자가회복(auto recover)이 불가능함
+    2. static pod : kube-api가  컨트롤 하는 것이 아닌 node내의 /etc/kubernetes/manifest 내에 설정 되어 있는 yaml파일의 형상으로만 동작
+    2. deployments : pod에 대한 설정과 더불어 각종 네트워크 replica 갯수등의 설정이 포함 되어 있어 상시 원하는 replica 숫자 만큼 
+       pod의 갯수를 유지 하려고 함
+     - database
+     - 기타 서비스 component (redis, kafaka 등)
 
 ## Monitoring
 모니터링 / 장애 알림
 
-k
 
-먼저 eks에서 서비스를 제공 하기 위해서는 pod에 서비스를 올려야 합니다.
-pod를 구동하는 방법은 크게 3가지가 있습니다.
-1. pod : kubectl run 으로 시작 하며 파드가 삭제 될 경우 자가회복(auto recover)이 불가능함
-2. static pod : kube-api가  컨트롤 하는 것이 아닌 node내의 /etc/kubernetes/manifest 내에 설정 되어 있는 yaml파일의 형상으로만 동작
-2. deployments : pod에 대한 설정과 더불어 각종 네트워크 replica 갯수등의 설정이 포함 되어 있어 상시 원하는 replica 숫자 만큼 
-   pod의 갯수를 유지 하려고 함
 
 1. 아래 제시된 상황에 맞는 아키텍처와 필요한 코드를 공유부탁드립니다. 
     - 상황 및 요구사항
