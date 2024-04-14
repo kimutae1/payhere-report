@@ -1,0 +1,46 @@
+{
+    "version": "1.0",
+    "invokingEvent": "{\"configurationItemDiff\"
+      :{\"changedProperties\":{\"Relationships.0\":{\"previousValue\":{\"resourceId\":null,\"resourceName\":\"no-tag-role-esliarll\",
+        \"resourceType\":\"AWS::IAM::Role\",\"name\":\"Is associated with \"},\"updatedValue\":null,\"changeType\":\"DELETE\"},
+        \"SupplementaryConfiguration.Tags\":
+        {\"previousValue\":{},\"updatedValue\":null,\"changeType\":\"DELETE\"},\"SupplementaryConfiguration.Policy\":
+        {\"previousValue\":\"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Id\\\":\\\"default\\\",\\\"Statement\\\":[
+          {\\\"Sid\\\":\\\"2b5ae24b-be9c-41f3-ac3f-48f329b06ec1\\\",\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":
+            {\\\"Service\\\":\\\"config.amazonaws.com\\\"},\\\"Action\\\":\\\"lambda:InvokeFunction\\\",\\\"Resource\\\":
+            \\\"arn:aws:lambda:ap-northeast-2:905418063435:function:no-tag\\\",\\\"Condition\\\":
+            {\\\"StringEquals\\\":{\\\"AWS:SourceAccount\\\":\\\"905418063435\\\"}}}]}\",
+            \"updatedValue\":null,\"changeType\":\"DELETE\"},\"Configuration\":
+            {\"previousValue\":
+              {\"functionName\":\"no-tag\",\"functionArn\":\"arn:aws:lambda:ap-northeast-2:905418063435:function:no-tag\"
+                ,\"runtime\":\"nodejs20.x\",\"role\":\"arn:aws:iam::905418063435:role/service-role/no-tag-role-esliarll\"
+                ,\"handler\":\"index.handler\",\"codeSize\":838,\"description\":\"\",\"timeout\":3,\"memorySize\":128,
+                \"lastModified\":\"2024-04-13T10:52:19.867+0000\",\"codeSha256\":\"o0g98FWQpiSdKMgFcI6Sju268EX9Lj5QvW3MH/VayCs\\u003d\",
+                \"version\":\"$LATEST\",\"tracingConfig\":
+                {\"mode\":\"PassThrough\"},\"revisionId\":\"49d47346-d8ef-4c8f-818a-0e7bd4a65c55\",\"layers\":[],\"state\":\"Active\",
+                \"lastUpdateStatus\":\"Successful\",\"fileSystemConfigs\":[],\"packageType\":\"Zip\",\"architectures\":[\"arm64\"],\"ephemeralStorage\":
+                {\"size\":512},\"snapStart\":{\"applyOn\":\"None\",\"optimizationStatus\":\"Off\"},\"runtimeVersionConfig\":
+                {\"runtimeVersionArn\":\"arn:aws:lambda:ap-northeast-2::runtime:e510d001332c5ac4354ceb185ddd6ef3def14993da7ab2533668b6a6a1ee661d\"},
+                \"loggingConfig\":
+                {\"logFormat\":\"Text\",\"logGroup\":\"/aws/lambda/no-tag\"}},\"updatedValue\":null,\"changeType\":\"DELETE\"}},
+                \"changeType\":\"DELETE\"},\"configurationItem\":
+                {\"relatedEvents\":[],\"relationships\":[],\"configuration\":null,\"supplementaryConfiguration\":
+                  {},\"tags\":{},\"configurationItemVersion\":\"1.3\",\"configurationItemCaptureTime\":\"2024-04-14T06:57:47.260Z\",
+                  \"configurationStateId\":1713077867260,\"awsAccountId\":\"905418063435\",\"configurationItemStatus\":\"ResourceDeleted\",
+                  \"resourceType\":\"AWS::Lambda::Function\",\"resourceId\":\"no-tag\",\"resourceName\":\"no-tag\",
+                  \"ARN\":\"arn:aws:lambda:ap-northeast-2:905418063435:function:no-tag\",\"awsRegion\":\"ap-northeast-2\",
+                  \"availabilityZone\":null,\"configurationStateMd5Hash\":\"\",\"resourceCreationTime\":null,
+                  \"configurationItemDeliveryTime\":null,\"recordingFrequency\":null},
+                  \"notificationCreationTime\":\"2024-04-14T06:57:48.709Z\",\"messageType\":\"ConfigurationItemChangeNotification\",
+                  \"recordVersion\":\"1.3\"}",
+    "ruleParameters": "{}",
+    "resultToken": "eyJlbmNyeXB0ZWREYXRhIjpbODgsNDksMCwtOTIsNzgsLTYsLTEyMCwtNzAsODcsLTQzLC0yNSwyMyw0NSwxMDQsLTE3LC0xMDYsLTQ4LC0xLDY5LC05NywtOTUsNTksLTQ0LDExNCwtMTA0LC0zNywtNjEsOTUsNzYsLTMyLDEyMSwtMTEyLC03OSwtMzMsODIsLTU3LC05NiwxMTIsLTE5LC0xMDMsMSwtNzEsLTc3LC02MywtMTAwLC03Myw3MCwyNCw5NiwxMCwtMTksLTEsLTY3LDc1LC0xOSw4NywxMjQsMTEzLC01NSwxMDAsMjYsLTgxLDE4LDE0LDYsNjIsMTAxLDEwMCwtNTgsLTU0LC00NiwtMTA0LDEwNyw5MSwtMjYsMjksLTU4LDksLTY2LDI3LC04OSwtMTIwLDQ0LC0xMjEsODksLTczLDksMTEyLDY4LC0zNSwxNywtMSwyMiwtMzUsLTExNCw4OCwzNiwxMDUsLTcxLC0xMTUsLTk5LC05OSwtNTcsNjUsLTIzLC0xMDQsLTE3LC0zMiwxMDksMTE0LC0zMywtMjgsNSwtOTksMTAwLDMyLC0xMjIsLTg1LDEsMTA1LC05MCwtOSwtNyw4NSw2MSwtMTIsODUsLTY0LDAsMTEwLC0yMCwtMTEsLTU2LC01MiwtOTYsLTkwLDExNiw2NCwtNjQsLTEwNywtNTksLTExLC0zOSw2NCwtNzQsLTYzLC01MSwtMjQsLTU1LDM0LC04MSwzMiw2NiwxMjcsLTk4LDEwMiwtMzgsMTgsLTQyLDExMiwtNzcsNDMsLTM1LC00MCwxMiwtMTAzLDcyLC0xMDEsMTE1LC0xMTgsNzgsLTEyOCwtMTEyLDcsMTAsMjAsLTkwLC0xMywtNjQsMTEzLDExLC0xMDQsLTk3LDExMSw1OCwtNTAsLTc5LDEwLDExNiwtNzAsMTE2LC02NywtOTcsNzksMTI2LC03OSw0MSwtNjEsLTgyLDQ4LDMzLDUyLDk0LDIsMTE2LC04Niw2NiwxNSw1MiwzMCw3NywyNSwxLDEyMywyNCwtNDUsLTI1LC04MiwtNDIsMTAzLC02Niw5MCw4NSwtNzMsMywzMyw0OCwtMzIsLTgyLC00NSw5OSwxOSwtOTMsOTksLTEyNSwxMjUsLTExMiwtOTQsMTI2LC0yNCw4OSwyOCwtMTksLTc3LDU2LC02Niw1NiwzNywtODMsLTExMiwtODUsNjcsNiwtMzUsOTIsOTksNzksLTEwNywtNTAsODEsLTE1LC0xMTEsLTExNiwtNjgsLTI3LC0xMTQsNzAsLTQwLC04NCwxLC0zNiwtNDAsODYsNDIsNSwtOTMsLTYwLC0zMCwzOSw4OCwwLDY5LC0xMDUsMjksLTQ5LDY1LDg0LDQ1LC0xMjYsLTEyNywtMzIsMTMsLTYxLC05NywtMTEyLC0xMTksNzgsLTgzLC02OSwtNTEsLTUxLDc3LC0yOCw5OCw2NSwtNjUsLTEyMiwxMTgsLTExMCwtNTYsNzcsMTI0LDMwLC04MiwtNTQsLTEyLDg0LDY0LDM1LC01NiwyMSwtNzQsLTQyLDg1LC0xMTcsLTI1LDkyLDc5LDEwNSwtMTA5LDIxLC0xMjgsLTMxLDI2LDk4LDM0LDEyNCwtNDEsMTIyLDYzLC01MSwtODcsNTIsMzIsLTM1LC02NCwxMSwtNDMsLTgwLC04MCwtNzQsLTYxLDEyNSwtMzYsLTQ4LDc3LC0xMjEsOTAsODMsMzcsOTksLTUxLC0xLDE3LC03NSwtMzAsODksLTIsLTg0LDc5LDc0LC0xMDUsLTQ1LC00NiwtMTA2LC03MSw1OCwxOSwtOTcsMTMsLTgsLTEwMSwtNDYsLTg2LC01MCwtMTE4LC0yMCw5NSw1MCwtMzEsLTQ4LC0yNywxMDksNjEsNjUsNzMsOCwtNDksLTc0LDIsLTEyOCwtMjAsMTEzLC0xMDYsNzUsLTUwLC02MSwtMTAzLDg0LDEyLDM1LC0zLDExOCwtMTA2LDIyLC0zNCwxMTcsMTgsLTkxLDM1LC0yMCwtMTAsLTQ4LC0yLDgwLC01NSwtMTI2LC05OCwtNTYsLTExNiwxMDEsMTA3LC00LDk3LC0xMDEsLTc4LC0zNywxMTcsOTYsOTgsLTUxLDI2LC0xMjgsLTg2LDQ1LDkzLC0xMjgsLTQyLDEyMCwtNTAsLTk3LDkzLC0xMDUsLTExNCw1NCwtMzksLTUxLDM4LC03MCw1NCwtODUsLTY1LC0yNywtOCw0NywtOTAsLTgsNywxMTksMTA2LC0zNyw4MCwxMDMsOTcsLTU0LDQyLDI3LDExNSwtOTEsMzMsMjAsLTExNiwyOCw2MCwtMzMsLTUxLC05Niw2NCwxMDgsNDIsLTMwLC0xMTksNDcsLTI1LDMzLC0zMSw4MCwtMjgsNTcsLTYwLC0zMSwtNzEsMTAsMTgsMTIwLDE4LC0zNCw1OCw0NCwtMTE0LC0xMSwxMjAsLTYwLDEwMCw0OSwxMjMsLTU0LDYzLDI4LC0xMjgsLTEyOCwtNzAsODAsLTc5LC00NSwzMCw5OCw0NSwtMTUsLTM3LC0zMiwtMSwtMTIxLDEyMywxMTcsOTQsMTEsLTE5LDkyLC03NCwtNzgsNTQsLTIyLDM3LDEwMywzNywyMiwtNDMsNjUsMTE5LC04MSwtMiw4NiwtNDksMjcsOSw1MywtMzIsLTE0LC01NiwtNjcsLTk0LC01OCwtNjAsLTI4LC0xMTQsMTA3LDMsMzcsMTEwLC0xNiwxMCwxMDcsNDMsLTY0LC05MSwxMTcsMTMsNDcsNzcsNyw1MywtOTYsMTE3LC01MiwtNjEsMTA5LC0yNywtNDgsMSwtMTIxLC0xMDgsMzksMjQsLTQ2LDk5LDUyLDIwLC05NywxMDYsLTEwMywzNSwtMjYsLTg1LC0xMDYsLTkzLC05MSw1MCw1MywxMTIsMTEzLDE4LDI4LC04NiwzLDcxLC0xMywxMDYsMjEsOTAsLTMwLDU5LC0xMDksLTEwMSwtNTEsMTA5LDI3XSwibWF0ZXJpYWxTZXRTZXJpYWxOdW1iZXIiOjEsIml2UGFyYW1ldGVyU3BlYyI6eyJpdiI6Wy05MiwyOSwxMDYsLTMyLC0yNyw4MCwtMzksLTk3LC0zLDY4LC0zNSwtMTA1LC05MCwzNSwtMzksLTI4XX19",
+    "eventLeftScope": true,
+    "executionRoleArn": "arn:aws:iam::905418063435:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig",
+    "configRuleArn": "arn:aws:config:ap-northeast-2:905418063435:config-rule/config-rule-d59y0w",
+    "configRuleName": "no-tag-py",
+    "configRuleId": "config-rule-d59y0w",
+    "accountId": "905418063435",
+    "evaluationMode": "DETECTIVE"
+}
+

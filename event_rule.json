@@ -1,0 +1,11 @@
+{
+  "detail-type": ["Config Rules Compliance Change"],
+  "source": ["aws.config"],
+  "detail": {
+    "configRuleName": ["Config-no-tag"],
+    "messageType": ["ComplianceChangeNotification"],
+    "newEvaluationResult": {
+      "complianceType": ["NON_COMPLIANT"]
+    }
+  }
+}
