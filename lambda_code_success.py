@@ -94,7 +94,7 @@ def lambda_handler(event, context):
     # Log current_tags, configuration_item, and rule_parameters for debugging
     #if configuration_item["resourceType"] == "AWS::Lambda::Function":
     client = boto3.client('lambda')
-    all_tags = client.list_tags(Resource=configuration_item["ARN"])
+    #all_tags = client.list_tags(Resource=configuration_item["ARN"])
     current_tags = all_tags['Tags']  # get only user tags.  
     print("all_tags:", all_tags )
     print("Current Tags:", current_tags)

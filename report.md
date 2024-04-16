@@ -24,9 +24,6 @@
   * 필수 키워드
      * 이미 서버에 들어온 트래픽
      *  main process \
-dkdj \
-!(img/1.png)
-dfkjfd k \
 
 # answers 1
 서비스 연속성을 위한 무중단, 즉 고가용성을 달성 하기 위해서는 여러가지 항목을 고려 해야 합니다. 
@@ -78,13 +75,18 @@ spec:
 ```
   
  - database
+   - DB 또한 위와 같은 맥락으로 auto scale이 된다면 비용 / 무중단 서비스에 크게 기여를 하게 됩니다.
+   - 가능하다면 aurora RDS 사용을 추천하며 당장 전환이 어렵다면 read - replica db를 구성 하여 안정성을 도모 할 수 있습니다.
  - 기타 서비스 component (redis, kafaka 등) 
+   - redis , kafaka , mongoDB 등을 활용 하면 DB와 어플리케이션의 부하를 감소시켜주고 빠른 응답속도를 사용자에게 제공 해줄 수 있습니다.
+     해당 서비스는 대부분 key-value기반의 nosql의 원리를 갖음으로 기본적으로 autoscale 가능한 구조로 설계되어 있습니다.
+
 ## CICD
 - 과거에는 배포를 하고 나면 소스 적용을 하기 위해 WAS를 재구동 하여 프로세스가 up/down이 되었고 일일이 사람의 손으로 수작업을 하는 경우가 많았습니다. 
 - 현재 devops의  배포 방식은 기본적으로 rolling , blue/green, Canary를 택하여 구현을 합니다.
     - 구현 난이도는 rolling > blue/green >  Canary 순이며 난이도가 높을 수록 검증 하기에 유리합니다.
 - 무중단 서비스를 위해서라면 개발 / 스테이징 단계의 검증도 매우 중요합니다. Devops조직은 CICD내에 검증도 자동으로 구현 할 수 있도록 지원하는 프로세스가 마련 되어야 합니다.
-  보통 아래 솔루션들을 많이 채용 하고 있습니다.
+  보통 아래 솔루션들을  CICD Pipe line에 많이 포함 하고 있습니다.
    - sonarQube
    - junit
    - Selenium 
@@ -95,7 +97,6 @@ spec:
 
 
 ## Maintenance
-
 
 
 1. 아래 제시된 상황에 맞는 아키텍처와 필요한 코드를 공유부탁드립니다. 

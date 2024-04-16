@@ -1,0 +1,5 @@
+all_tags: {'ResponseMetadata': {'RequestId': '7a3934d1-8c54-4b10-807c-8ae08a0b040e', 
+'HTTPStatusCode': 200, 'HTTPHeaders': {'date': 'Sun, 14 Apr 2024 17:25:45 GMT', 'content-type': 'application/json',
+'content-length': '11', 'connection': 'keep-alive', 'x-amzn-requestid': '7a3934d1-8c54-4b10-807c-8ae08a0b040e'},
+'RetryAttempts': 0}, 'Tags': {}}
+
