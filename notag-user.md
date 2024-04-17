@@ -3,11 +3,11 @@
 sequenceDiagram
     AwsEventBridge ->> AwsConfig: 리소스 변경 이벤트감지
     AwsConfig ->> lambda: 규정 준수 식별 요청
-    lambda --) AwsConfig: 1. 규정 준수 여부 전달
-    lambda -->> slack: 규칙 위반 리소스 전송
-    lambda --) AWS: Tag update
+    lambda --) AwsConfig: 1. 규정평가 결과 전달
+    lambda -->> slack: 2. 규칙 위반 리소스 전송
+    lambda --) AWS: 3. Tag update
 ```
-
+![alt text](image-3.png)
 
 ### event-bridge rule 셋팅
 ```

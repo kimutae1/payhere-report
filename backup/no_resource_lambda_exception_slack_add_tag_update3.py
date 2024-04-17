@@ -72,66 +72,41 @@ def update_tags_for_resources(resource_arns, tags, aws_region):
     )
     return response
 
-
 def lambda_handler(event, context):
+    event_all = json.dumps(event)
+    print(event_all)
     if 'invokingEvent' not in event:
-     send_message_to_slack("Error: 'invokingEvent' key not found in the event object.")
-     return
-    # Lambda 함수의 이벤트 파라미터에서 invokingEvent를 추출하고, 바로 파싱 및 포맷팅하여 출력합니다.
-    print(json.dumps(json.loads(event['invokingEvent']), indent=4))
+        #send_message_to_slack("Error: 'invokingEvent' key not found in the event object.")
+        return
 
-    #    try:
-    #        invoking_event = json.loads(event["invokingEvent"])
-    #        configuration_item = invoking_event["configurationItem"]
-    #    except KeyError:
-    #        send_message_to_slack("Error: 'invokingEvent' key not found in the event object.")
-    #        return
+    invoking_event = json.loads(event['invokingEvent'])
+    configuration_item = invoking_event.get("configurationItem")
+    if not configuration_item:
+        #send_message_to_slack("Error: 'configurationItem' key not found in the invokingEvent.")
+        return
 
     rule_parameters = json.loads(event.get("ruleParameters", "{}"))
     result_token = event.get("resultToken", "No token found.")
 
     evaluation = evaluate_compliance(configuration_item, rule_parameters)
 
-
-    # 규정 준수 여부에 따른 메시지 설정
     if evaluation["compliance_type"] == "NON_COMPLIANT":
         resource_id = configuration_item["ARN"].split(":")[-1]
         aws_region = configuration_item["awsRegion"]
         compliance_message = f"NON_COMPLIANT: Resource {resource_id} does not comply with the rule. {evaluation['annotation']}"
-
-
-        # 리소스 ARN과 AWS 리전을 사용하여 태그 업데이트
+        print("tag update 진행")
         update_response = update_tags_for_resources([configuration_item["ARN"]], rule_parameters, aws_region)
         compliance_message += f"\nTags updated for resource {resource_id}. Response: {update_response}"
 
-
-
-    # 이벤트 로깅을 Slack 메시지로 전송
-    event_text = json.dumps(event, indent=4)  # JSON 문자열로 변환
-    slack_message = f"""
-     *Compliance Evaluation*
-     - Compliance Status: {evaluation["compliance_type"]}
-     - Resource Type: {configuration_item["resourceType"]}
-     - ARN: {configuration_item["ARN"]}
-     - AWS Region: {configuration_item["awsRegion"]}
-     - AWS Account ID: {configuration_item["awsAccountId"]}
-     - Message: {compliance_message}
-     """
-    
-    # 슬랙에 메시지 전송
-    send_message_to_slack(slack_message)
-
-
-    config = boto3.client("config", region_name=configuration_item["awsRegion"])
-    config.put_evaluations(
-        Evaluations=[
-            {
-                "ComplianceResourceType": configuration_item["resourceType"],
-                "ComplianceResourceId": configuration_item["resourceId"],
-                "ComplianceType": evaluation["compliance_type"],
-                "Annotation": evaluation["annotation"],
-                "OrderingTimestamp": configuration_item["configurationItemCaptureTime"]
-            },
-        ],
-        ResultToken=result_token
-    )
+        # 이벤트 로깅을 Slack 메시지로 전송
+        event_text = json.dumps(event)  # JSON 문자열로 변환
+        slack_message = f"""
+        *Compliance Evaluation*
+        - Compliance Status: {evaluation["compliance_type"]}
+        - Resource Type: {configuration_item["resourceType"]}
+        - ARN: {configuration_item["ARN"]}
+        - AWS Region: {configuration_item["awsRegion"]}
+        - AWS Account ID: {configuration_item["awsAccountId"]}
+        - Message: {compliance_message}
+        """
+        #send_message_to_slack(slack_message)
