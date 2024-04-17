@@ -1,0 +1,21 @@
+{
+    "version": "1.0",
+    "invokingEvent": 
+    "{\"configurationItemDiff\":
+      {
+        \"changedProperties\": {}, \"changeType\":\"CREATE\"
+      },
+        \"configurationItem\":
+        {\"relatedEvents\":[],
+         \"relationships\":[],
+         \"configuration\":
+          {\"attachments\":[],\"availabilityZone\":\"ap-northeast-2a\",\"createTime\":\"2024-04-16T14:52:45.042Z\",\"encrypted\":false,\"kmsKeyId\":null,\"outpostArn\":null,\"size\":1,\"snapshotId\":\"\",\"state\":\"available\",\"volumeId\":\"vol-051fe71d23f06572f\",\"iops\":3000,\"tags\":[],\"volumeType\":\"gp3\",\"fastRestored\":null,\"multiAttachEnabled\":false,\"throughput\":125,\"sseType\":null},\"supplementaryConfiguration\":{},\"tags\":{},\"configurationItemVersion\":\"1.3\",\"configurationItemCaptureTime\":\"2024-04-16T14:52:54.344Z\",\"configurationStateId\":1713279174344,\"awsAccountId\":\"905418063435\",\"configurationItemStatus\":\"ResourceDiscovered\",\"resourceType\":\"AWS::EC2::Volume\",\"resourceId\":\"vol-051fe71d23f06572f\",\"resourceName\":null,\"ARN\":\"arn:aws:ec2:ap-northeast-2:905418063435:volume/vol-051fe71d23f06572f\",\"awsRegion\":\"ap-northeast-2\",\"availabilityZone\":\"ap-northeast-2a\",\"configurationStateMd5Hash\":\"\",\"resourceCreationTime\":\"2024-04-16T14:52:45.042Z\",\"configurationItemDeliveryTime\":null,\"recordingFrequency\":null},\"notificationCreationTime\":\"2024-04-16T14:52:54.582Z\",\"messageType\":\"ConfigurationItemChangeNotification\",\"recordVersion\":\"1.3\"}",
+    "ruleParameters": "{\"user\":\"notag-user\"}",
+    "eventLeftScope": false,
+    "executionRoleArn": "arn:aws:iam::905418063435:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig",
+    "configRuleArn": "arn:aws:config:ap-northeast-2:905418063435:config-rule/config-rule-v37t6o",
+    "configRuleName": "config-no-tag",
+    "configRuleId": "config-rule-v37t6o",
+    "accountId": "905418063435",
+    "evaluationMode": "DETECTIVE"
+}

@@ -48,32 +48,14 @@ def evaluate_compliance(configuration_item, rule_parameters):
 def lambda_handler(event, context):
     print("Event:", json.dumps(event))  # 이벤트 로깅
     print("Context:", context)  # 컨텍스트 로깅
-#    try:
-#        # invokingEvent에서 JSON 문자열을 파싱하여 Python 객체로 변환
-#        # 변환된 객체에서 configurationItem 추출
-#        configuration_item = json.loads(event.get("invokingEvent", "{}")).get("configurationItem")
-#        if not configuration_item:
-#            raise ValueError("configurationItem not found in invokingEvent")
-#    except KeyError as e:
-#        print(f"Key error: {e} - event dictionary does not contain the expected key.")
-#    except ValueError as e:
-#        print(f"Value error: {e}")
-#    except Exception as e:
-#        print(f"Unexpected error: {e}")
-#
-# 이후 로직은 configuration_item이 성공적으로 추출되었을 때 실행됩니다.
-# 예외가 발생한 경우, 이 부분은 실행되지 않을 수 있으므로 적절한 처리가 필요합니다.
- 
-# event를 불러오다
+
    # invoking_event = json.loads(event["invokingEvent"])
-   # configuration_item = invoking_event["configurationItem"]
-   # configuration_item = json.loads(event["configurationItem"])
-    configuration_item = json.loads(event["invokingEvent"])["configurationItem"]
+    configuration_item = invoking_event["configurationItem"]
     rule_parameters = json.loads(event["ruleParameters"])
     result_token = event.get("resultToken", "No token found.")
 
     # 파라미터 로깅
-    #print("Invoking Event:", invoking_event)
+   # print("Invoking Event:", invoking_event)
     print("Configuration Item:", configuration_item)
     print("Rule Parameters:", rule_parameters)
     print("Result Token:", result_token)

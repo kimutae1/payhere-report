@@ -1,5 +1,7 @@
+import os
 import json
 import boto3
+import requests
 
 def find_violation(current_tags, required_tags):
     violation = ""
@@ -29,7 +31,6 @@ def evaluate_compliance(configuration_item, rule_parameters):
             "annotation": "The configurationItem was deleted and therefore cannot be validated."
         }
 
-    # AWS Config를 통해 제공되는 태그 정보 사용
     current_tags = configuration_item.get("tags", {})
 
     violation = find_violation(current_tags, rule_parameters)
@@ -45,42 +46,50 @@ def evaluate_compliance(configuration_item, rule_parameters):
         "annotation": "This resource is compliant with the rule."
     }
 
-def lambda_handler(event, context):
-    print("Event:", json.dumps(event))  # 이벤트 로깅
-    print("Context:", context)  # 컨텍스트 로깅
-#    try:
-#        # invokingEvent에서 JSON 문자열을 파싱하여 Python 객체로 변환
-#        # 변환된 객체에서 configurationItem 추출
-#        configuration_item = json.loads(event.get("invokingEvent", "{}")).get("configurationItem")
-#        if not configuration_item:
-#            raise ValueError("configurationItem not found in invokingEvent")
-#    except KeyError as e:
-#        print(f"Key error: {e} - event dictionary does not contain the expected key.")
-#    except ValueError as e:
-#        print(f"Value error: {e}")
-#    except Exception as e:
-#        print(f"Unexpected error: {e}")
-#
-# 이후 로직은 configuration_item이 성공적으로 추출되었을 때 실행됩니다.
-# 예외가 발생한 경우, 이 부분은 실행되지 않을 수 있으므로 적절한 처리가 필요합니다.
- 
-# event를 불러오다
-   # invoking_event = json.loads(event["invokingEvent"])
-   # configuration_item = invoking_event["configurationItem"]
-   # configuration_item = json.loads(event["configurationItem"])
-    configuration_item = json.loads(event["invokingEvent"])["configurationItem"]
-    rule_parameters = json.loads(event["ruleParameters"])
-    result_token = event.get("resultToken", "No token found.")
+def send_message_to_slack(text):
+    webhook_url = os.environ['SLACK_WEBHOOK_URL']
+    slack_data = {'text': text}
 
-    # 파라미터 로깅
-    #print("Invoking Event:", invoking_event)
-    print("Configuration Item:", configuration_item)
-    print("Rule Parameters:", rule_parameters)
-    print("Result Token:", result_token)
+    response = requests.post(
+        webhook_url, data=json.dumps(slack_data),
+        headers={'Content-Type': 'application/json'}
+    )
+
+    if response.status_code != 200:
+        raise ValueError(
+            'Request to slack returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )
+
+
+def lambda_handler(event, context):
+    # Lambda 함수의 이벤트 파라미터에서 invokingEvent를 추출하고, 바로 파싱 및 포맷팅하여 출력합니다.
+    print(json.dumps(json.loads(event['invokingEvent']), indent=4))
+
+    try:
+        invoking_event = json.loads(event["invokingEvent"])
+        configuration_item = invoking_event["configurationItem"]
+    except KeyError:
+        send_message_to_slack("Error: 'invokingEvent' key not found in the event object.")
+        return
+
+    rule_parameters = json.loads(event.get("ruleParameters", "{}"))
+    result_token = event.get("resultToken", "No token found.")
 
     evaluation = evaluate_compliance(configuration_item, rule_parameters)
 
-    config = boto3.client("config")
+    # 비준수 상태일 경우, 리소스의 태그를 업데이트합니다.
+    if evaluation["compliance_type"] == "NON_COMPLIANT":
+        resource_id = configuration_item["ARN"].split(":")[-1]
+        aws_region = configuration_item["awsRegion"]
+        update_resource_tags(resource_id, aws_region, rule_parameters)
+        send_message_to_slack(f"Updated tags for resource {resource_id} to comply with the rule.")
+
+    # 이벤트 로깅을 Slack 메시지로 전송
+    event_text = json.dumps(event, indent=4)  # JSON 문자열로 변환
+    send_message_to_slack(f"Logged Event: {event_text}")
+
+    config = boto3.client("config", region_name=configuration_item["awsRegion"])
     config.put_evaluations(
         Evaluations=[
             {
