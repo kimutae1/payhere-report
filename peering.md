@@ -1,5 +1,6 @@
-# VPC간 네트워크 연동 문제 
+﻿# VPC간 네트워크 연동 문제 
 ```
+
 아래 제시된 상황에 맞는 답변을 부탁드립니다.
     - 상황
         - 서로 다른 VPC로 운영되는 서비스를 연동하고자 합니다.
@@ -26,7 +27,8 @@ VPC 피어링 연결은 프라이빗 IPv4 주소 또는 IPv6 주소를 사용하
 동일한 네트워크에 속하는 경우와 같이 VPC의 인스턴스가 서로 통신할 수 있습니다.
 사용자의 자체 VPC 또는 다른 AWS 계정의 VPC와 VPC 피어링 연결을 만들 수 있습니다. VPC는 다른 리전에 있을 수 있습니다(리전간 VPC 피어링 연결이라고도 함).
 
-![alt text](img/image-20.png)
+![](img/image-20.png)
+
 
 ## Transit Gateway 란?
 ---
@@ -37,7 +39,7 @@ AWS Transit Gateway는 고객이 자신의 Amazon Virtual Private Cloud(VPC)와 
 온프레미스 연결의 경우 AWS VPN을 각 Amazon VPC에 따로 연결해야 합니다. 
 이 솔루션은 구축하는 데 시간이 오래 걸리며 여러 VPC가 수백 개로 늘어나면 관리하기가 힘들어질 수 있습니다.
 
-![alt text](img/image-21.png)
+![](img/image-21.png)
 
 ## but 한계점
 ---
@@ -49,11 +51,11 @@ AWS Transit Gateway는 고객이 자신의 Amazon Virtual Private Cloud(VPC)와 
 ---
 * 해결책은 AWS 서비스 중 Private Link를 이용 하는 것입니다.
 
-![alt text](img/image-22.png)
+![](img/image-22.png)
 
 AWS 콘솔에서 찾아보면 private link라는 솔루션은 없습니다.
 
-![alt text](img/image-23.png)
+![](img/image-23.png)
 
 그 이유는 실제 private link를 구성 하기 위한 구성 요소는 아래와 같기 때문입니다.
 
@@ -63,10 +65,10 @@ AWS 콘솔에서 찾아보면 private link라는 솔루션은 없습니다.
 
 테스트를 위해 동일한 CIDR의 VPC를  구성하겠습니다.
 
-![alt text](img/image-25.png)
+![](img/image-25.png)
 
 
-![alt text](img/image-26.png)
+![](img/image-26.png)
 
 
 B Accouunt VPC -> A Account VPC를 호출 하는 구성입니다. 
@@ -80,13 +82,13 @@ BE[B EC2] --> B[B EndPoint] --> A[A EndPointService] --> NLB --> AE[A EC2]
 구성은 작업은 역순으로 해주는게 좋습니다.
 
 ## Endpoint Service 구성 (A VPC)
-![alt text](img/image-27.png)
+![](img/image-27.png)
 
 
 ## Endpoint 구성 (B VPC)
-![alt text](img/image-28.png)
+![](img/image-28.png)
 
 A B 둘다 Ec2를 생성 하고 호출 테스트를 진행 한 결과 입니다.
 호출은 B의 endpoint에 있는 DNS이름으로 호출 하면 됩니다.
 
-![alt text](img/image-29.png)
+![](img/image-29.png)

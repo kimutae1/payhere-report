@@ -28,9 +28,9 @@ sequenceDiagram
 
 # test
 * 초기 리소스 생성 시 모습
-![alt text](img/image-18.png)
+![](img/image-18.png)
 * 약 1분 뒤 규정 준수 검사 이후 모습
-![alt text](img/image-19.png)
+![](img/image-19.png)
 
 
 ### event-bridge rule 
@@ -53,17 +53,17 @@ sequenceDiagram
 
 ### AWS Config 설정
 1. 파라미터 항목에 원하는 tag를 넣어야 조건이 성립 합니다. 
-![alt text](img/image-10.png)
+![](img/image-10.png)
 2. 규정 준수 검사를 람다에서 진행 하면 아래처럼 미규칙 준수 항목이 표시 됩니다.
-![alt text](img/image-13.png)
+![](img/image-13.png)
 
 ---
 
 ### lambda 설정
 1. requests, json 등의 추가 모듈이 필요함으로 layer 추가합니다.
-![alt text](img/image-12.png)
+![](img/image-12.png)
 2. 환경 변수에 slack_url을 등록합니다
-![alt text](img/image-11.png)
+![](img/image-11.png)
 
 
 ```
@@ -187,6 +187,6 @@ def lambda_handler(event, context):
 1. 가장 간단한 incomming webhook으로 구성 합니다.
 2. slack url이 나오면 람다 코드의 환경 변수에 주입 합니다.
 
-![alt text](img/image-14.png)
+![](img/image-14.png)
 
 3. slack 메세지에는 리소스 arn등  규칙 위반  리소스에 대한 정보가 들어 있습니다
