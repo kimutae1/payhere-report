@@ -12,8 +12,9 @@
 
 ## **과제 설명**
 ```
-안녕하세요 먼저 면접 기회를 주셔서 감사 드립니다.
-포스 , 키오스크 전문 기업이며 주로 돈이 오고 가는 결제 서비스를 운영 하시다 보니 
+안녕하세요 김태형입니다. 
+과제를 주셔서 감사 드립니다.
+포스 , 키오스크 전문 기업이며 주로 자금이 오고 가는 결제 서비스를 운영 하시다 보니 
 서비스 안정성이 제일 중요 하다고 판단 되며 그에 걸 맞도록 과제를 진행 하여 보겠습니다.
 ```
 
@@ -84,25 +85,36 @@ spec:
 
 ## Monitoring / Alret / Log
  - 무중단 서비스를 위해서는 장애 감지 및 사전 예방 등도 매우 중요합니다.
- - 그러기 위해서는 인프라 가시성 확보도 매우 중요한 과제 중 하나 일 겁니다.
- - 인프라 모니터링은 크게 두가지가 있습니다.
+ - 그러기 위해서는 인프라 가시성 확보도 매우 중요한 과제 중 하나 입니다
+ - 인프라 모니터링은 지표(metric)은 크게 두가지가 있습니다.
 ```mermaid
-graph LR
- m[monitoring metric] --> i[infra resource] 
+graph TD
+ i[infra resource] 
  i[infra resource]  --- cpu
  i[infra resource]  --- memory
  i[infra resource]  --- disk
  i[infra resource]  --- network
- m[monitoring metric] --> l[log]
+ l[log 기반]
  l --- error,exception
  l --- keyword
  l --- r[response time]
 ``` 
+### Tools
+- 클라우드나 쿠버네티스를 이용 한다면 아래와 같은 모니터링 도입이 필요 합니다.
+- open telemetry 기반
+  - ELK(elastic search)
+  - prometheus - grafana 
 
+- AWS(cloudwatch 기반)
+  - athena : log의 시각화
+  - 토플로지 맵 : AWS x-ray, ServiceLens 
 
-
-## Maintenance
- - cluster upgrade
- - DB 작업
- - 
+## MSA 기반 아키텍처 설계 
+  - MSA 기반 설계는 장단점이 있고 개발자분들의 호불호도 있기 때문에 언급 하는 부분은 조금 조심 스럽습니다.
+  - 하지만 해당 요구 사항 중 하나인 '무중단 서비스'를 위해서 라면 MSA도입도 필요 하다고 여겨집니다.
+    - 일부 장애가 전체 서비스로 확장될 가능성이 적습니다.
+    - 부분적으로 발생하는 장애에 대한 격리가 수월합니다.
+    - kafaka / SNS / MQ / Redis 등 메세지 큐 기반 서비스를 구현 한다면
+     세션의 관리 및 처리 되지 않는 데이터의 유실을 막을 수 있습니다.
+![alt text](img/image333.png)
 

@@ -26,7 +26,7 @@ sequenceDiagram
     lambda -->> slack: 3. 규칙 위반 리소스 전송
 ```
 
-# test
+## test
 * 초기 리소스 생성 시 모습
 ![](img/image-18.png)
 * 약 1분 뒤 규정 준수 검사 이후 모습
