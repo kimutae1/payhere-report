@@ -1,22 +1,22 @@
-### tag 없는 리소스 생성 시 감지  및 자동업데이트 
+## [tag] 없는 리소스 생성 시 감지  및 자동업데이트 
 ---
+```
  - 상황 및 요구사항
      - 개발자분들이 특정 리소스를 자유롭게 생성할 수 있는 환경입니다.
      - AWS에선 비용 추적 및 관리를 위해 태그를 활용할 수 있습니다.
-     - 태그가 없이 생성된 리소스에 대해 slack으로 인지하고 \
-       또한 자동으로 태깅을 적용하고자 합니다.
+     - 태그가 없이 생성된 리소스에 대해 slack으로 인지하고 또한 자동으로 태깅을 적용하고자 합니다.
      - 해당 코드를 실행하기 위해 slack_url은 외부에서 주입할 수 있어야 합니다.
      - 명시한 상황 이외에는 자유롭게 가정하여 진행하시면 됩니다.
+```
 
 ## Architecture
+### 구성요소
 ```
-구성요소
  - AWS Config 
  - AWS Lambda
  - AWS EventBridge
  - Slack
 ```
-
 ```mermaid
 sequenceDiagram
     AwsEventBridge ->> AwsConfig: 리소스 변경 이벤트감지
@@ -25,7 +25,13 @@ sequenceDiagram
     lambda --) AWS: 2. Tag update
     lambda -->> slack: 3. 규칙 위반 리소스 전송
 ```
-![alt text](image-3.png)
+
+# test
+* 초기 리소스 생성 시 모습
+![alt text](img/image-18.png)
+* 약 1분 뒤 규정 준수 검사 이후 모습
+![alt text](img/image-19.png)
+
 
 ### event-bridge rule 
 * 리소스 변경이 감지 될 때 aws config의 설정 된 규칙에 따라 규정 준수 여부를 판단 한다.
@@ -46,15 +52,18 @@ sequenceDiagram
 ---
 
 ### AWS Config 설정
-![alt text](image-10.png)
 1. 파라미터 항목에 원하는 tag를 넣어야 조건이 성립 합니다. 
+![alt text](img/image-10.png)
+2. 규정 준수 검사를 람다에서 진행 하면 아래처럼 미규칙 준수 항목이 표시 됩니다.
+![alt text](img/image-13.png)
+
 ---
 
 ### lambda 설정
 1. requests, json 등의 추가 모듈이 필요함으로 layer 추가합니다.
-![alt text](image-12.png)
+![alt text](img/image-12.png)
 2. 환경 변수에 slack_url을 등록합니다
-![alt text](image-11.png)
+![alt text](img/image-11.png)
 
 
 ```
@@ -177,3 +186,7 @@ def lambda_handler(event, context):
 ### slack 설정
 1. 가장 간단한 incomming webhook으로 구성 합니다.
 2. slack url이 나오면 람다 코드의 환경 변수에 주입 합니다.
+
+![alt text](img/image-14.png)
+
+3. slack 메세지에는 리소스 arn등  규칙 위반  리소스에 대한 정보가 들어 있습니다
